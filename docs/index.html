@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<script type="text/javascript">
+    (function () {
+        // only want one resizer on the page
+        if (document.documentElement.className.indexOf("g-resizer-v3-init") > -1) return;
+        document.documentElement.className += " g-resizer-v3-init";
+        // require IE9+
+        if (!("querySelector" in document)) return;
+        function resizer() {
+            var elements = Array.prototype.slice.call(document.querySelectorAll(".g-artboard[data-min-width]")),
+                widthById = {};
+            elements.forEach(function (el) {
+                var parent = el.parentNode,
+                    width = widthById[parent.id] || parent.getBoundingClientRect().width,
+                    minwidth = el.getAttribute("data-min-width"),
+                    maxwidth = el.getAttribute("data-max-width");
+                widthById[parent.id] = width;
+
+                if (+minwidth <= width && (+maxwidth >= width || maxwidth === null)) {
+                    el.style.display = "block";
+                } else {
+                    el.style.display = "none";
+                }
+            });
+            try {
+                if (window.parent && window.parent.$) {
+                    window.parent.$("body").trigger("resizedcontent", [window]);
+                }
+                if (window.require) {
+                    require(['foundation/main'], function () {
+                        require(['shared/interactive/instances/app-communicator'], function (AppCommunicator) {
+                            AppCommunicator.triggerResize();
+                        });
+                    });
+                }
+            } catch (e) { console.log(e); }
+        }
+
+        document.addEventListener('DOMContentLoaded', resizer);
+        // feel free to replace throttle with _.throttle, if available
+        window.addEventListener('resize', throttle(resizer, 200));
+
+        function throttle(func, wait) {
+            // from underscore.js
+            var _now = Date.now || function () { return new Date().getTime(); },
+                context, args, result, timeout = null, previous = 0;
+            var later = function () {
+                previous = _now();
+                timeout = null;
+                result = func.apply(context, args);
+                if (!timeout) context = args = null;
+            };
+            return function () {
+                var now = _now(), remaining = wait - (now - previous);
+                context = this;
+                args = arguments;
+                if (remaining <= 0 || remaining > wait) {
+                    if (timeout) {
+                        clearTimeout(timeout);
+                        timeout = null;
+                    }
+                    previous = now;
+                    result = func.apply(context, args);
+                    if (!timeout) context = args = null;
+                } else if (!timeout && options.trailing !== false) {
+                    timeout = setTimeout(later, remaining);
+                }
+                return result;
+            };
+        }
+
+
+    })();
+</script>
+
+<head>
+    <title>Fastest coffee drinks for baristas</title>
+    <meta property="og:title" content="Fastest coffee drinks for baristas">
+    <meta property="og:description"
+        content="The kind of coffee drink you are producing is dependent on multiple factors but to guarantee the best results, you have to time it accordingly.">
+    <meta property="og:type" content="article">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        .header-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: 1em;
+        }
+
+        .row-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+            gap: 3em;
+        }
+
+        .column-container {
+            display: flex;
+            flex-direction: column;
+            flex-basis: 100%;
+            flex: 1;
+            gap: 10em;
+        }
+
+        @media (max-width: 768px) {
+            .row-container {
+                flex-direction: column;
+            }
+        }
+
+        /* mobile */
+
+        @media (max-width:700px) {
+
+            .chart-row {
+                display: block;
+            }
+
+            .chart-row .chart {
+                padding: 0;
+            }
+
+            .photo-section {
+                display: block;
+            }
+
+            .photo {
+                padding: 0;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-container">
+        <img src="pexels-photo-302899.jpeg"
+            style="width:100vw; height:60vh; margin-left:-10px; margin-right: -10px; margin-top: 10px; margin-bottom: 0px; max-width: 100vw; object-fit: cover;"
+            alt="Someone pouring a latte with latte art.">
+        <h6>Image Credit:
+            <a href="https://www.pexels.com/photo/person-performing-coffee-art-302899/">Pexels</a>
+        </h6>
+    </div>
+
+    <div class="row-container">
+        <h1>The fastest and the most convenient drinks for baristas to make</h1>
+    </div>
+
+    <div class="row-container">
+        <h4>by Jui Sarwate</h4>
+    </div>
+
+    <div class="row-container">
+        <p>
+            The coffee industry is expansive and full of demand as it relates to flavor and delivery of drinks.
+            Customers frequenting some of the nation&#8217;s most popular chains are looking for the speed and taste of
+            their
+            coffee drinks to make an impact and stay consistent.
+        </p>
+    </div>
+
+    <div class="row-container">
+        <p>
+            There are two main commercial coffee bean variants. The arabica and the robusta. The choice you make can
+            affect your coffee&#8217;s flavor.
+        </p>
+    </div>
+
+    <div class="row-container">
+        <div class="column-container">
+            <iframe title="Two Most Common Commercial Coffee Beans" aria-label="Table" id="datawrapper-chart-GLH7E"
+                src="https://datawrapper.dwcdn.net/GLH7E/1/" scrolling="no" frameborder="0"
+                style="width: 0; min-width: 100% !important; border: none;" height="433"></iframe>
+            <script type="text/javascript">!function () { "use strict"; window.addEventListener("message", (function (e) { if (void 0 !== e.data["datawrapper-height"]) { var t = document.querySelectorAll("iframe"); for (var a in e.data["datawrapper-height"]) for (var r = 0; r < t.length; r++) { if (t[r].contentWindow === e.source) t[r].style.height = e.data["datawrapper-height"][a] + "px" } } })) }();
+            </script>
+        </div>
+    </div>
+</body>
+
+<div class="row-container">
+    <p>
+        Coffee making of the traditional and the variety is developed through timings and methodologies developed by
+        individual cafes and companies. However, there are still some standards in place or explained by the <a
+            href="https://www.ncausa.org">National Coffee Association USA</a>.
+    </p>
+</div>
+
+<div class="row-container">
+    <p>
+        The kind of coffee drink you are producing is dependent on multiple factors but to guarantee the best
+        results, you have to time it accordingly. The fastest drink to make is an espresso and the slowest are cold
+        brews which require overnight steeping, around 12 hours of it, to be made correctly.
+    </p>
+</div>
+
+<div class="row-container">
+    <p>
+        COFFEE TIMING CHART HERE
+    </p>
+</div>
+
+<div class="row-container">
+    <p>
+        Starbucks is well-known for its regular selection of drinks and also for its secret menu with choices like
+        Pink Drinks and, at one point, the Unicorn and Mermaid Frappacinos.
+    </p>
+</div>
+
+<div class="row-container">
+    <p>
+        In the last few years, especially during the pandemic, Starbucks employees have found themselves at times
+        unreasonably challenged with the orders coming through the pipeline. A policy at Starbucks states that
+        baristas should be able to produce 10 customer orders, from purchase to preparation, in 30 minutes,
+        according to a Fast Company <a
+            href="https://www.fastcompany.com/90732166/what-happened-to-starbucks-how-a-progressive-company-lost-its-way">piece</a>.
+    </p>
+
+</div>
+<div class="row-container">
+    <p>
+        According to the article, one-fifth of drink orders that Starbucks baristas were fulfilling came through the
+        mobile order feature on the Starbucks app. The speed changed with the introduction of products that
+        exhausted workers with their complications and intricacies. These baristas were already frustrated by their
+        low wages and issues with Covid-19 safety handling.
+    </p>
+
+</div>
+<div class="row-container">
+    <p>
+        Looking at the Starbucks on Broadway outside of Columbia University, they occasionally turn off mobile
+        orders. When asked about it, a barista explained that it&#8217;s because they couldn&#8217;t keep up with the
+        rush
+        especially when they were understaffed during the winter holidays. Even during some of the slowest times,
+        which are Saturday and weekdays after rush hour according to a barista, mobile orders may be turned off just
+        to compensate for the number of people that come into the small location.
+    </p>
+</div>
+
+<div class="row-container">
+    <p>
+        The kinds of drinks you choose can vary when you order at a place like Starbucks depending on their
+        methodologies regarding coffee production. However, looking into the drinks that are easiest for them to
+        make or the typically fastest for them to push out could help you help your baristas move through orders.
+        And even if you still choose to go with your drink of choice, knowing the timings of your drinks will create
+        a lot more appreciation for how quickly and expertly your barista does their job.
+    </p>
+</div>
+
+</html>
